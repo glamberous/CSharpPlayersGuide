@@ -32,10 +32,7 @@ namespace TicTacToe {
         public void PlayMatch() {
             Board.Instance.ClearBoard();
             do {
-                TakeTurn(Players.X);
-                if (EndState())
-                    break;
-                TakeTurn(Players.O);
+                TakeTurn();
             } while (!EndState());
         }
 
@@ -54,14 +51,14 @@ namespace TicTacToe {
             }
         }
 
-        private void TakeTurn(Players currentPlayer) {
+        private void TakeTurn() {
             ICommand command;
             char input;
             Board.Instance.DrawBoard();
             Console.WriteLine("Player {0}'s turn.", currentPlayer.ToString());
             do {
                 input = Console.ReadKey().KeyChar;
-                command = inputHandler.HandleInput(input, currentPlayer);
+                command = inputHandler.HandleInput(input);
             } while (command == null);
             Execute(commandInvoker, command);
         }

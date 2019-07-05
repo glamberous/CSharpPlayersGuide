@@ -11,25 +11,30 @@ namespace TicTacToe {
     }
 
     public class MarkCommand : ICommand {
-        private readonly Players currentPlayer;
         private readonly int index;
 
-        public MarkCommand(int index, Players currentPlayer) {
-            this.currentPlayer = currentPlayer;
+        public MarkCommand(int index) {
             this.index = index;
         }
 
         public void ExecuteAction() {
             if (Board.Instance.SelectedSlotIsFree(index)) {
-                if (currentPlayer == Players.X)
-                    Board.Instance.SetCell(index, "X");
-                else
-                    Board.Instance.SetCell(index, "O");
-            } 
+                Board.Instance.SetCell(index, Board.Instance.CurrentPlayer.ToString());
+                Board.Instance.TogglePlayer();
+            }
         }
 
         public void UndoAction() {
             Board.Instance.SetCell(index, " ");
+            Board.Instance.TogglePlayer();
+        }
+    }
+
+    public class MarkCommand : ICommand {
+        public UndoCommand() { }
+
+        public void ExeecuteAction() {
+
         }
     }
 }

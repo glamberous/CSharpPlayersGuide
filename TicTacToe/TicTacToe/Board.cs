@@ -18,6 +18,12 @@ namespace TicTacToe {
             }
         }
 
+        private Players CurrentPlayer { get; } = Players.X;
+
+        public void TogglePlayer() {
+            CurrentPlayer = CurrentPlayer == Players.X ? Players.O : Players.X;
+        }
+
         private readonly string[] BoardLines = new[] {
                 " {0} | {1} | {2} ",
                 "   |   |   ",
