@@ -29,12 +29,4 @@ namespace TicTacToe {
             Board.Instance.TogglePlayer();
         }
     }
-
-    public class MarkCommand : ICommand {
-        public UndoCommand() { }
-
-        public void ExeecuteAction() {
-
-        }
-    }
 }
