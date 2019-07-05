@@ -23,10 +23,5 @@ namespace TicTacToe {
             //if userInput == 'm':                                return redo;
             return null;
         }
-
-        private static void Execute(CommandInvoker commandInvoker, ICommand newCommand) {
-            commandInvoker.SetCommand(newCommand);
-            commandInvoker.Invoke();
-        }
     }
 }
