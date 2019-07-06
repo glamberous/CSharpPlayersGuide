@@ -9,17 +9,17 @@ namespace TicTacToe {
         static void Main(string[] args) {
             bool playAgain = false;
             do {
-                Game Game = new Game();
-                Game.PlayMatch();
-                Game.DisplayResults();
-                playAgain = Game.PlayAgain();
-                CommandInvoker.Singleton.ClearHistory();
+                Game game = new Game();
+                game.PlayMatch();
+                game.DisplayResults();
+                playAgain = game.PlayAgain();
             } while (playAgain);
         }
     }
 
     class Game {
         readonly InputHandler inputHandler = new InputHandler();
+        readonly CommandInvoker commandInvoker = new CommandInvoker();
 
         public bool PlayAgain() {
             char input;
@@ -60,17 +60,17 @@ namespace TicTacToe {
                 input = Console.ReadKey().KeyChar;
                 command = inputHandler.HandleInput(input);
             } while (command == null);
-            Execute(command);
+            Execute(commandInvoker, command);
         }
 
-        private static void Execute(ICommand command) {
+        private static void Execute(CommandInvoker commandInvoker, ICommand command) {
             if (command is UndoCommand)
-                CommandInvoker.Singleton.Undo();
+                commandInvoker.Undo();
             else if (command is RedoCommand)
-                CommandInvoker.Singleton.Redo();
+                commandInvoker.Redo();
             else {
-                CommandInvoker.Singleton.SetCommand(command);
-                CommandInvoker.Singleton.Invoke();
+                commandInvoker.SetCommand(command);
+                commandInvoker.Invoke();
             }
         }
     }
