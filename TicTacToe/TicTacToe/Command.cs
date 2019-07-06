@@ -18,15 +18,25 @@ namespace TicTacToe {
         }
 
         public void ExecuteAction() {
-            if (Board.Instance.SelectedSlotIsFree(index)) {
-                Board.Instance.SetCell(index, Board.Instance.CurrentPlayer.ToString());
-                Board.Instance.TogglePlayer();
+            if (Board.Singleton.SelectedSlotIsFree(index)) {
+                Board.Singleton.SetCell(index, Board.Singleton.CurrentPlayer.ToString());
+                Board.Singleton.TogglePlayer();
             }
         }
 
         public void UndoAction() {
-            Board.Instance.SetCell(index, " ");
-            Board.Instance.TogglePlayer();
+            Board.Singleton.SetCell(index, " ");
+            Board.Singleton.TogglePlayer();
         }
+    }
+
+    public class UndoCommand : ICommand {
+        public void ExecuteAction() { }
+        public void UndoAction() { }
+    }
+
+    public class RedoCommand : ICommand {
+        public void ExecuteAction() { }
+        public void UndoAction() { }
     }
 }

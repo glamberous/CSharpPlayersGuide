@@ -13,12 +13,12 @@ namespace TicTacToe {
                 Game.PlayMatch();
                 Game.DisplayResults();
                 playAgain = Game.PlayAgain();
+                CommandInvoker.Singleton.ClearHistory();
             } while (playAgain);
         }
     }
 
     class Game {
-        readonly CommandInvoker commandInvoker = new CommandInvoker();
         readonly InputHandler inputHandler = new InputHandler();
 
         public bool PlayAgain() {
@@ -30,20 +30,20 @@ namespace TicTacToe {
         }
 
         public void PlayMatch() {
-            Board.Instance.ClearBoard();
+            Board.Singleton.ClearBoard();
             do {
                 TakeTurn();
             } while (!EndState());
         }
 
-        private bool EndState() => (Players.None != Board.Instance.CheckForWinner()) || !Board.Instance.EmptySquareExists();
+        private bool EndState() => (Players.None != Board.Singleton.CheckForWinner()) || !Board.Singleton.EmptySquareExists();
 
         public void DisplayResults() {
-            Board.Instance.DrawBoard();
-            if (Players.None != Board.Instance.CheckForWinner()) {
-                Console.WriteLine("{0} is the winner! \nPlay again? Y/N", Board.Instance.CheckForWinner().ToString());
+            Board.Singleton.DrawBoard();
+            if (Players.None != Board.Singleton.CheckForWinner()) {
+                Console.WriteLine("{0} is the winner! \nPlay again? Y/N", Board.Singleton.CheckForWinner().ToString());
             }
-            else if (!Board.Instance.EmptySquareExists()) {
+            else if (!Board.Singleton.EmptySquareExists()) {
                 Console.WriteLine("The game is a Draw. \nPlay again? Y/N");
             }
             else {
@@ -54,18 +54,24 @@ namespace TicTacToe {
         private void TakeTurn() {
             ICommand command;
             char input;
-            Board.Instance.DrawBoard();
-            Console.WriteLine("Player {0}'s turn.", currentPlayer.ToString());
+            Board.Singleton.DrawBoard();
+            Console.WriteLine("Player {0}'s turn.", Board.Singleton.CurrentPlayer.ToString());
             do {
                 input = Console.ReadKey().KeyChar;
                 command = inputHandler.HandleInput(input);
             } while (command == null);
-            Execute(commandInvoker, command);
+            Execute(command);
         }
 
-        private static void Execute(CommandInvoker commandInvoker, ICommand newCommand) {
-            commandInvoker.SetCommand(newCommand);
-            commandInvoker.Invoke();
+        private static void Execute(ICommand command) {
+            if (command is UndoCommand)
+                CommandInvoker.Singleton.Undo();
+            else if (command is RedoCommand)
+                CommandInvoker.Singleton.Redo();
+            else {
+                CommandInvoker.Singleton.SetCommand(command);
+                CommandInvoker.Singleton.Invoke();
+            }
         }
     }
 }

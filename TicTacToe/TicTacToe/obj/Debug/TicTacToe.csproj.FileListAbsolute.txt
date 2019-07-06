@@ -5,3 +5,10 @@ D:\Projects\C#PlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojAssembl
 D:\Projects\C#PlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.CoreCompileInputs.cache
 D:\Projects\C#PlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
 D:\Projects\C#PlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojAssemblyReference.cache
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.CoreCompileInputs.cache
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe.config
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe
+D:\Projects\CSharpPlayersGuide\TicTacToe\TicTacToe\bin\Debug\TicTacToe.pdb

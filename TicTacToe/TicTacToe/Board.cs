@@ -2,23 +2,23 @@
 
 namespace TicTacToe {
     public sealed class Board {
-        private static Board instance = null;
+        private static Board singleton = null;
         private static readonly object padlock = new object();
 
         private Board() { }
 
-        public static Board Instance {
+        public static Board Singleton {
             get {
                 lock (padlock) {
-                    if (instance == null) {
-                        instance = new Board();
+                    if (singleton == null) {
+                        singleton = new Board();
                     }
-                    return instance;
+                    return singleton;
                 }
             }
         }
 
-        private Players CurrentPlayer { get; } = Players.X;
+        public Players CurrentPlayer = Players.X;
 
         public void TogglePlayer() {
             CurrentPlayer = CurrentPlayer == Players.X ? Players.O : Players.X;

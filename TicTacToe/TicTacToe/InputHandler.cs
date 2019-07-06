@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace TicTacToe {
     class InputHandler {
-        readonly CommandInvoker commandInvoker = new CommandInvoker();
-
         public ICommand HandleInput(char userInput) {
-            int playerIndex = Convert.ToInt32(Board.Instance.CurrentPlayer) - 1;
+            int playerIndex = Convert.ToInt32(Board.Singleton.CurrentPlayer) - 1;
             if (userInput == KeyBinds.Keys[playerIndex, 0])     return new MarkCommand(0);
             if (userInput == KeyBinds.Keys[playerIndex, 1])     return new MarkCommand(1);
             if (userInput == KeyBinds.Keys[playerIndex, 2])     return new MarkCommand(2);
@@ -19,8 +17,8 @@ namespace TicTacToe {
             if (userInput == KeyBinds.Keys[playerIndex, 6])     return new MarkCommand(6);
             if (userInput == KeyBinds.Keys[playerIndex, 7])     return new MarkCommand(7);
             if (userInput == KeyBinds.Keys[playerIndex, 8])     return new MarkCommand(8);
-            //if userInput == 'n':                                return undo;
-            //if userInput == 'm':                                return redo;
+            if (userInput == 'n')                               return new UndoCommand();
+            if (userInput == 'm')                               return new RedoCommand();
             return null;
         }
     }
