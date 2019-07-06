@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace TicTacToe {
     class CommandInvoker {
         private readonly ICommand[] commands;
-        private int commandIndex = 0;
         public CommandInvoker() => commands = new ICommand[10];
-        public void SetCommand(ICommand command) => commands[commandIndex] = command;
+        
+        private int commandIndex = 0;
         private void IncrementIndex() => commandIndex = commandIndex != 9 ? commandIndex + 1 : 0;
         private void DecrementIndex() => commandIndex = commandIndex != 0 ? commandIndex - 1 : 9;
+
+        public void SetCommand(ICommand command) => commands[commandIndex] = command;
 
         public void Invoke() {
             commands[commandIndex].ExecuteAction();
@@ -27,7 +29,6 @@ namespace TicTacToe {
             } else {
                 IncrementIndex();
             }
-            
         }
 
         public void Redo() {

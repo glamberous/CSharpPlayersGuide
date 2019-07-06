@@ -19,10 +19,7 @@ namespace TicTacToe {
         }
 
         public Players CurrentPlayer = Players.X;
-
-        public void TogglePlayer() {
-            CurrentPlayer = CurrentPlayer == Players.X ? Players.O : Players.X;
-        }
+        public void TogglePlayer() => CurrentPlayer = CurrentPlayer == Players.X ? Players.O : Players.X;
 
         private readonly string[] BoardLines = new[] {
                 " {0} | {1} | {2} ",
@@ -35,13 +32,13 @@ namespace TicTacToe {
                 "   |   |   ",
                 " {0} | {1} | {2} ",
             };
-
         private string[] BoardCells = new[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", };
 
+        public bool SelectedSlotIsFree(int index) => BoardCells[index] == " " ? true : false;
+        public void SetCell(int index, string mark) => BoardCells[index] = mark;
         public void ClearBoard() {
-            for (int cellIndex = 0; cellIndex < BoardCells.Length; cellIndex++) {
-                BoardCells[cellIndex] = " ";
-            }
+            for (int cellIndex = 0; cellIndex < BoardCells.Length; cellIndex++)
+                SetCell(cellIndex, " ");
         }
 
         public void DrawBoard() {
@@ -54,6 +51,7 @@ namespace TicTacToe {
                     Console.WriteLine(BoardLines[boardLineIndex]);
             }
         }
+        private int GetCurrentMarkBaseIndex(int boardLineIndex) => ((boardLineIndex / 4) * 3);
 
         public bool EmptySquareExists() {
             foreach (string square in BoardCells)
@@ -85,9 +83,5 @@ namespace TicTacToe {
                 return true;
             return false;
         }
-
-        public void SetCell(int index, string mark) => BoardCells[index] = mark;
-        private int GetCurrentMarkBaseIndex(int boardLineIndex) => ((boardLineIndex / 4) * 3);
-        public bool SelectedSlotIsFree(int index) => BoardCells[index] == " " ? true : false;
     }
 }
