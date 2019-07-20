@@ -46,7 +46,8 @@ namespace TicTacToe {
             Console.WriteLine();
             for (int boardLineIndex = 0; boardLineIndex < 9; boardLineIndex++) {
                 if (boardLineIndex % 4 == 0)
-                    Console.WriteLine(String.Format(BoardLines[boardLineIndex], BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 0], BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 1], BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 2]));
+                    Console.WriteLine(String.Format(BoardLines[boardLineIndex], BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 0], 
+                        BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 1], BoardCells[GetCurrentMarkBaseIndex(boardLineIndex) + 2]));
                 else
                     Console.WriteLine(BoardLines[boardLineIndex]);
             }
